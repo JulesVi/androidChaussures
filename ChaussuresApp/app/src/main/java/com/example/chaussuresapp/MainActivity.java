@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
 
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
 
@@ -38,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
     private Tuile tuile3 = new Tuile("tuile3");
     private Tuile[] tuiles = {tuile1, tuile2, tuile3};
 
+    private Button btn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +53,15 @@ public class MainActivity extends AppCompatActivity {
         GridView gridView = (GridView)findViewById(R.id.GridView);
         TuilesAdapter tuilesAdapter = new TuilesAdapter(this, tuiles);
         gridView.setAdapter(tuilesAdapter);
+
+        btn = (Button) findViewById(R.id.btnSearch);
+        btn.setOnClickListener(myactionlistener);
     }
+
+    private View.OnClickListener myactionlistener = new View.OnClickListener() {
+        public void onClick(View v) {
+            //startSignInActivity();
+        }
+    };
 
 }
