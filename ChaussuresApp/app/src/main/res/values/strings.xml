@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">ChaussuresApp</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_home">Accueil</string>
+    <string name="title_add">+</string>
+    <string name="title_profil">Mon Profil</string>
+    <string name="icon_description">Image représentant l\'appIcon</string>
 </resources>

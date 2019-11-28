@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">First Application</string>
+    <string name="login">Login</string>
+    <string name="pswd">Password</string>
+    <string name="btn_connect">CONNEXION</string>
+    <string name="ErrorBadLogin">Mauvais login</string>
+    <string name="ErrorBadPwd">Mauvais mot de passe</string>
+</resources>
