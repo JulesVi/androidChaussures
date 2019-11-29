@@ -4,4 +4,7 @@
     <string name="title_add">+</string>
     <string name="title_profil">Mon Profil</string>
     <string name="icon_description">Image représentant l\'appIcon</string>
+    <string name="title_activity_description_annonce">DescriptionAnnonce</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>

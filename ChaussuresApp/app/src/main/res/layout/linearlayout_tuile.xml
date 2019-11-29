@@ -8,14 +8,15 @@
 
     <FrameLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/border">
 
+        <!--border à corriger-->
         <ImageView
             android:id="@+id/imageview_photo_chaussure"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:scaleType="fitXY" />
-
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:scaleType="fitXY"/>
     </FrameLayout>
 
     <TextView
