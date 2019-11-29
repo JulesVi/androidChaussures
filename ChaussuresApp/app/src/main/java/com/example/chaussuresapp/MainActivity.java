@@ -33,10 +33,15 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
     };
-    private Tuile tuile1 = new Tuile("tuile1");
-    private Tuile tuile2 = new Tuile("tuile2");
-    private Tuile tuile3 = new Tuile("tuile3");
-    private Tuile[] tuiles = {tuile1, tuile2, tuile3};
+//    Tuile(String imgPath, String titreAnnonce, String auteurAnnonce)
+
+    private Tuile tuile1 = new Tuile(R.drawable.img1, "Belles chaussures", "Chris Cole");
+    private Tuile tuile2 = new Tuile(R.drawable.img2, "Chaussure moche", "Toto");
+    private Tuile tuile3 = new Tuile(R.drawable.img3, "Pas une chaussure", "Balthazar");
+    private Tuile tuile4 = new Tuile(R.drawable.img3, "Autre chose", "Michel");
+    private Tuile tuile5 = new Tuile(R.drawable.img3, "Encore autre truc", "Jean claude");
+
+    private Tuile[] tuiles = {tuile1, tuile2, tuile3, tuile4, tuile5};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

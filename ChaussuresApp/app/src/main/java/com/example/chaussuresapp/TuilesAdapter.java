@@ -1,10 +1,12 @@
 package com.example.chaussuresapp;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.chaussuresapp.Class.Tuile;
@@ -35,8 +37,21 @@ public class TuilesAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        TextView testTextView = new TextView(mContext);
-        testTextView.setText(String.valueOf((position)));
-        return testTextView;
+        final Tuile tuile = tuiles[position];
+
+        if (convertView == null) {
+            final LayoutInflater layoutInflater = LayoutInflater.from(mContext);
+            convertView = layoutInflater.inflate(R.layout.linearlayout_tuile, null);
+        }
+
+        final ImageView imageView = (ImageView)convertView.findViewById(R.id.imageview_photo_chaussure);
+        final TextView titreTextView = (TextView)convertView.findViewById(R.id.textview_annonce_titre);
+        final TextView auteurTextView = (TextView)convertView.findViewById(R.id.textview_annonce_auteur);
+
+        imageView.setImageResource(tuile.getImgId());
+        titreTextView.setText(tuile.getTitreAnnonce());
+        auteurTextView.setText(tuile.getAuteurAnnonce());
+
+        return convertView;
     }
 }
