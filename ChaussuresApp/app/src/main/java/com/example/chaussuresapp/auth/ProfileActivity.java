@@ -1,27 +1,20 @@
 package com.example.chaussuresapp.auth;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.chaussuresapp.MainActivity;
 import com.example.chaussuresapp.R;
 import com.example.chaussuresapp.base.BaseActivity;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.textfield.TextInputEditText;
 
-import java.net.URL;
 import java.util.Arrays;
 
 public class ProfileActivity extends BaseActivity {
