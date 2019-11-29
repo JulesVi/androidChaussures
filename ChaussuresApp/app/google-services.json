@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "767566028028",
+    "firebase_url": "https://chaussureapp.firebaseio.com",
+    "project_id": "chaussureapp",
+    "storage_bucket": "chaussureapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:767566028028:android:50e7eca7d37b9da71ecb79",
+        "android_client_info": {
+          "package_name": "com.example.chaussuresapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "767566028028-sp25v4k3mgi93n4lnonqrod67vusbvj2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.chaussuresapp",
+            "certificate_hash": "3e278b48f4252f55ebd4a778d8b812f329df4196"
+          }
+        },
+        {
+          "client_id": "767566028028-uqdu81vhki849m55gq32hanuvn6lka9a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2pJdSA7lSYPjCeGOMgBlL4U0GFdhAZ2s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "767566028028-uqdu81vhki849m55gq32hanuvn6lka9a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
