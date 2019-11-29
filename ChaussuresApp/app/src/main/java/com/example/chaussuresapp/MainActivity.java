@@ -1,18 +1,27 @@
 package com.example.chaussuresapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.chaussuresapp.Class.Tuile;
+import com.example.chaussuresapp.auth.ProfileActivity;
+import com.firebase.ui.auth.AuthUI;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
 
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import java.util.Arrays;
+
 public class MainActivity extends AppCompatActivity {
+    private BottomNavigationView bottomNavigationView /*= (BottomNavigationView) findViewById(R.id.nav_view)*/;
+
     private TextView mTextMessage;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -28,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_notifications:
                     mTextMessage.setText(R.string.title_profil);
+                    startActivity(new Intent(MainActivity.this, ProfileActivity.class));
                     return true;
             }
             return false;
@@ -54,6 +64,15 @@ public class MainActivity extends AppCompatActivity {
         GridView gridView = (GridView)findViewById(R.id.GridView);
         TuilesAdapter tuilesAdapter = new TuilesAdapter(this, tuiles);
         gridView.setAdapter(tuilesAdapter);
+
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.nav_view);
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        bottomNavigationView.setSelectedItemId(R.id.navigation_home);
+
     }
 
 }
