@@ -3,6 +3,7 @@ package com.example.chaussuresapp;
 import android.os.Bundle;
 
 import com.example.chaussuresapp.Class.Tuile;
+import com.firebase.ui.auth.AuthUI;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +14,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
+
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
     private TextView mTextMessage;
@@ -42,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
 
     private Button btn;
 
+    //FOR DATA
+    // 1 - Identifier for Sign-In Activity
+    private static final int RC_SIGN_IN = 123;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,13 +62,26 @@ public class MainActivity extends AppCompatActivity {
         gridView.setAdapter(tuilesAdapter);
 
         btn = (Button) findViewById(R.id.btnSearch);
-        btn.setOnClickListener(myactionlistener);
+        btn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startSignInActivity();
+            }
+        });
     }
 
-    private View.OnClickListener myactionlistener = new View.OnClickListener() {
-        public void onClick(View v) {
-            //startSignInActivity();
-        }
-    };
+
+    // 2 - Launch Sign-In Activity
+    private void startSignInActivity(){
+        startActivityForResult(
+                AuthUI.getInstance()
+                        .createSignInIntentBuilder()
+                        .setTheme(R.style.AppTheme)
+                        .setAvailableProviders(
+                                Arrays.asList(new AuthUI.IdpConfig.EmailBuilder().build(), //EMAIL
+                                        new AuthUI.IdpConfig.GoogleBuilder().build())) // SUPPORT GOOGLE))
+                        .setIsSmartLockEnabled(false, true)
+                        .build(),
+                RC_SIGN_IN);
+    }
 
 }
