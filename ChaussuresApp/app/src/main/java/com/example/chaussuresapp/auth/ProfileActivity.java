@@ -1,14 +1,20 @@
 package com.example.chaussuresapp.auth;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.chaussuresapp.MainActivity;
 import com.example.chaussuresapp.R;
 import com.example.chaussuresapp.base.BaseActivity;
 import com.firebase.ui.auth.AuthUI;
@@ -28,6 +34,26 @@ public class ProfileActivity extends BaseActivity {
     // 2 - Identify each Http Request
     private static final int SIGN_OUT_TASK = 10;
     private static final int DELETE_USER_TASK = 20;
+
+    private BottomNavigationView bottomNavigationView;
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    finish();
+                    overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+                    return true;
+                case R.id.navigation_dashboard:
+                    return true;
+                case R.id.navigation_notifications:
+                    return true;
+            }
+            return false;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +75,9 @@ public class ProfileActivity extends BaseActivity {
 
         imageViewProfile = (ImageView) findViewById(R.id.imageViewProfile);
 
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.nav_view);
+
+        bottomNavigationView = findViewById(R.id.nav_view);
+        bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         bottomNavigationView.setSelectedItemId(R.id.navigation_notifications);
 
         this.updateUIWhenCreating();
@@ -61,11 +89,14 @@ public class ProfileActivity extends BaseActivity {
             btn.setText("connexion");
         }else{
             this.startSignInActivity();
-            //startActivityForResult(new Intent(this, SignInActivity.class), 1);
-            btn.setText("deconnexion");
-            finish();
-            //startActivity(getIntent());
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        btn.setText("deconnexion");
+        updateUIWhenCreating();
     }
 
     // 2 - Launch Sign-In Activity
@@ -93,6 +124,8 @@ public class ProfileActivity extends BaseActivity {
                         .load(this.getCurrentUser().getPhotoUrl())
                         .apply(RequestOptions.circleCropTransform())
                         .into(imageViewProfile);
+            }else{
+                imageViewProfile.setImageResource(R.drawable.baseline_account_circle_black_48dp);
             }
 
             //Get email & username from Firebase

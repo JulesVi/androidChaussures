@@ -42,7 +42,9 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_notifications:
                     mTextMessage.setText(R.string.title_profil);
+
                     startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                    overridePendingTransition(R.anim.slide_in_right,R.anim.fui_slide_out_left);
                     return true;
             }
             return false;
@@ -99,15 +101,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+        bottomNavigationView = findViewById(R.id.nav_view);
         mTextMessage = findViewById(R.id.message);
-        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         GridView gridView = (GridView)findViewById(R.id.GridView);
         TuilesAdapter tuilesAdapter = new TuilesAdapter(this, tuiles);
         gridView.setAdapter(tuilesAdapter);
 
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.nav_view);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -115,13 +116,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Monlog", String.valueOf(position));
                 Intent intent = new Intent(MainActivity.this, DescriptionAnnonce.class);
                 startActivity(intent);
-            }
-        });
-
-        btn = (Button) findViewById(R.id.btnSearch);
-        btn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                startSignInActivity();
             }
         });
     }
