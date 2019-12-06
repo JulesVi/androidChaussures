@@ -1,13 +1,11 @@
 package com.example.chaussuresapp.auth;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,8 +14,8 @@ import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.chaussuresapp.MainActivity;
 import com.example.chaussuresapp.R;
-import com.example.chaussuresapp.api.UserHelper;
 import com.example.chaussuresapp.base.BaseActivity;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -28,13 +26,8 @@ import java.util.Arrays;
 public class ProfileActivity extends BaseActivity {
 
     private static final int RC_SIGN_IN = 123;
-    // Creating identifier to identify REST REQUEST (Update username)
-    private static final int UPDATE_USERNAME = 30;
-
     private Button btn;
-    private Button btnModifCompte;
-    private EditText textInputEditTextUsername;
-    private TextView usernameTV;
+    private TextView textInputEditTextUsername;
     private TextView textViewEmail;
     private ImageView imageViewProfile;
 
@@ -69,32 +62,15 @@ public class ProfileActivity extends BaseActivity {
         setContentView(R.layout.activity_profile);
 
         btn = (Button) findViewById(R.id.profile_activity_button_update);
+        if (this.getCurrentUser() != null)
+            btn.setText("deconnexion");
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 buttonPressed();
             }
         });
 
-        btnModifCompte = (Button) findViewById(R.id.modifCompteBtn);
-        btnModifCompte.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                textInputEditTextUsername.setEnabled(true);
-                if(btnModifCompte.getText() == "oui"){
-                    updateUsernameInFirebase();
-                }
-                btnModifCompte.setText("oui");
-            }
-        });
-
-        if (this.getCurrentUser() != null){
-            btn.setText("deconnexion");
-            btnModifCompte.setVisibility(View.VISIBLE);
-        }
-
-        textInputEditTextUsername = (EditText) findViewById(R.id.textInputEditTextUsername);
-        textInputEditTextUsername.setEnabled(false);
-        usernameTV = (TextView) findViewById(R.id.usernameTV);
-
+        textInputEditTextUsername = (TextView) findViewById(R.id.textInputEditTextUsername);
         textViewEmail = (TextView) findViewById(R.id.textViewEmail);
 
         imageViewProfile = (ImageView) findViewById(R.id.imageViewProfile);
@@ -120,7 +96,6 @@ public class ProfileActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         btn.setText("deconnexion");
-        btnModifCompte.setVisibility(View.VISIBLE);
         updateUIWhenCreating();
     }
 
@@ -162,8 +137,6 @@ public class ProfileActivity extends BaseActivity {
             this.textInputEditTextUsername.setVisibility(View.VISIBLE);
             this.textViewEmail.setText(email);
             this.textViewEmail.setVisibility(View.VISIBLE);
-
-            this.usernameTV.setVisibility(View.VISIBLE);
         }
     }
 
@@ -190,18 +163,6 @@ public class ProfileActivity extends BaseActivity {
                 }
             }
         };
-    }
-
-    // 3 - Update User Username
-    private void updateUsernameInFirebase(){
-
-        String username = this.textInputEditTextUsername.getText().toString();
-
-        /*if (this.getCurrentUser() != null){
-            if (!username.isEmpty() &&  !username.equals("")){
-                UserHelper.updateUsername(username, this.getCurrentUser().getUid()).addOnFailureListener(this.onFailureListener()).addOnSuccessListener(this.updateUIAfterRESTRequestsCompleted(UPDATE_USERNAME));
-            }
-        }*/
     }
 
 }
