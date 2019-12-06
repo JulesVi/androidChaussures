@@ -21,10 +21,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.EventListener;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Serializable {
     private BottomNavigationView bottomNavigationView /*= (BottomNavigationView) findViewById(R.id.nav_view)*/;
 
     private TextView mTextMessage;
@@ -112,9 +113,8 @@ public class MainActivity extends AppCompatActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                Log.d("Monlog", String.valueOf(position));
                 Intent intent = new Intent(MainActivity.this, DescriptionAnnonce.class);
+                intent.putExtra("tuile", tuiles[position]);
                 startActivity(intent);
             }
         });
@@ -124,6 +124,5 @@ public class MainActivity extends AppCompatActivity {
     public void onResume(){
         super.onResume();
         bottomNavigationView.setSelectedItemId(R.id.navigation_home);
-
     }
 }

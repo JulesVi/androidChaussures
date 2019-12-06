@@ -7,4 +7,23 @@
     <string name="title_activity_description_annonce">DescriptionAnnonce</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="lorem_contenu">
+        Ceci est la description des chaussures, ca peut etre interessant mais inutile aussi, \n
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum eros et massa accumsan pulvinar.
+        Fusce ornare venenatis facilisis. Aliquam at tellus ultricies, porta ex et, ornare dui. Duis malesuada leo ac turpis efficitur
+        ultricies. Nunc varius elit sed elit auctor, nec dignissim mauris convallis. In semper massa in bibendum facilisis. Pellentesque
+        sed sollicitudin orci, non ullamcorper massa. Nulla maximus consequat ullamcorper. Maecenas semper enim at sapien volutpat, vel
+        facilisis tellus pellentesque. Nullam tincidunt nunc id tortor aliquam pellentesque.Ceci est la description des chaussures, ce
+        peut etre interessant mais inutile aussi, \n Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n Pellentesque elementum
+        eros et massa accumsan pulvinar. Fusce ornare venenatis facilisis. \n Aliquam at tellus ultricies, porta ex et, ornare dui. Duis
+        malesuada leo ac turpis efficitur ultricies. Nunc varius elit sed elit auctor, nec dignissim mauris convallis. In semper massa
+        in bibendum facilisis. Pellentesque sed sollicitudin orci, non ullamcorper massa. Nulla maximus consequat ullamcorper. Maecenas
+        semper enim at sapien volutpat, vel facilisis tellus pellentesque. Nullam tincidunt nunc id tortor aliquam pellentesque.Ceci est
+        la description des chaussures, ce peut etre interessant mais inutile aussi, \n Lorem ipsum dolor sit amet, consectetur adipiscing
+        elit.\n Pellentesque elementum eros et massa accumsan pulvinar. Fusce ornare venenatis facilisis. Aliquam at tellus ultricies, porta
+        ex et, ornare dui. Duis malesuada leo ac turpis efficitur ultricies. Nunc varius elit sed elit auctor, nec dignissim mauris convallis
+        . In semper massa in bibendum facilisis. Pellentesque sed sollicitudin orci, non ullamcorper massa. Nulla maximus consequat
+        ullamcorper. Maecenas semper enim at sapien volutpat, vel facilisis tellus pellentesque. Nullam tincidunt nunc id tortor aliquam
+        pellentesque.
+    </string>
 </resources>
