@@ -6,16 +6,14 @@ import android.os.Bundle;
 import com.example.chaussuresapp.auth.ProfileActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import com.example.chaussuresapp.Class.Tuile;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
 
 import android.view.MenuItem;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-public class DescriptionAnnonce extends AppCompatActivity {
+public class AddAnnonce extends AppCompatActivity {
+    private TextView mTextMessage;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -24,14 +22,15 @@ public class DescriptionAnnonce extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
+                    startActivity(new Intent(AddAnnonce.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                     finish();
                     return true;
                 case R.id.navigation_dashboard:
-                    startActivity(new Intent(DescriptionAnnonce.this, AddAnnonce.class));
-                    overridePendingTransition(R.anim.slide_in_right,R.anim.fui_slide_out_left);
                     return true;
                 case R.id.navigation_notifications:
-                    startActivity(new Intent(DescriptionAnnonce.this, ProfileActivity.class));
+                    finish();
+                    startActivity(new Intent(AddAnnonce.this, ProfileActivity.class));
                     overridePendingTransition(R.anim.slide_in_right,R.anim.fui_slide_out_left);
                     return true;
             }
@@ -42,16 +41,11 @@ public class DescriptionAnnonce extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_description);
+        setContentView(R.layout.activity_addannonce);
         BottomNavigationView navView = findViewById(R.id.nav_view);
+        mTextMessage = findViewById(R.id.message);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-        Tuile tuileAnnonce = (Tuile)getIntent().getSerializableExtra("tuile");
-
-        TextView titreAnnonce = findViewById(R.id.nomAnnonce);
-        titreAnnonce.setText(tuileAnnonce.getTitreAnnonce());
-
-        ImageView imageAnnonce = findViewById(R.id.imageAnnonce);
-        imageAnnonce.setImageResource(tuileAnnonce.getImgId());
+        navView.setSelectedItemId(R.id.navigation_dashboard);
     }
+
 }

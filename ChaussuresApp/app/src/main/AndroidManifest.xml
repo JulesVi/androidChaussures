@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".AddAnnonce"
+            android:label="@string/title_activity_addannonce"></activity>
+        <activity
             android:name=".DescriptionAnnonce"
             android:label="@string/title_activity_description_annonce" />
         <activity
@@ -23,7 +26,7 @@
         </activity> <!-- PROFILE ACTIVITY -->
         <activity
             android:name=".auth.ProfileActivity"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity" />
     </application>
 
 </manifest>

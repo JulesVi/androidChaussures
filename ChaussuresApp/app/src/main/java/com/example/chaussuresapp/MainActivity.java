@@ -5,25 +5,18 @@ import android.os.Bundle;
 
 import com.example.chaussuresapp.Class.Tuile;
 import com.example.chaussuresapp.auth.ProfileActivity;
-import com.firebase.ui.auth.AuthUI;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
 
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.GridView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.EventListener;
 
 public class MainActivity extends AppCompatActivity implements Serializable {
     private BottomNavigationView bottomNavigationView /*= (BottomNavigationView) findViewById(R.id.nav_view)*/;
@@ -36,17 +29,15 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
                     return true;
                 case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_add);
-                    return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_profil);
-
-                    startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                    startActivity(new Intent(MainActivity.this, AddAnnonce.class));
                     overridePendingTransition(R.anim.slide_in_right,R.anim.fui_slide_out_left);
                     return true;
+                case R.id.navigation_notifications:
+                    startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                overridePendingTransition(R.anim.slide_in_right,R.anim.fui_slide_out_left);
+                return true;
             }
             return false;
         }
@@ -119,7 +110,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
             }
         });
     }
-
     @Override
     public void onResume(){
         super.onResume();
