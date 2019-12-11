@@ -14,15 +14,15 @@ public class Tuile implements Serializable {
     private String localisation;
     private int cp; // code postal
 
-    public Tuile(int imgId, String titreAnnonce, String auteurAnnonce) {
+    public Tuile(int imgId, String titreAnnonce, String auteurAnnonce, String pied, int taille, String etat, String localisation, int cp ) {
         this.imgId = imgId;
         this.titreAnnonce = titreAnnonce;
         this.auteurAnnonce = auteurAnnonce;
-        this.pied = "droit";
-        this.taille = 42;
-        this.etat = "Neuf";
-        this.localisation = "Grenoble";
-        this.cp = 38100;
+        this.pied = pied;
+        this.taille = taille;
+        this.etat = etat;
+        this.localisation = localisation;
+        this.cp = cp;
     }
 
     public int getImgId() {

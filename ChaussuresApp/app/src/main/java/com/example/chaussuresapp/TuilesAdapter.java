@@ -39,6 +39,7 @@ public class TuilesAdapter extends BaseAdapter{
     public View getView(int position, View convertView, ViewGroup parent) {
         final Tuile tuile = tuiles[position];
 
+
         if (convertView == null) {
             final LayoutInflater layoutInflater = LayoutInflater.from(mContext);
             convertView = layoutInflater.inflate(R.layout.linearlayout_tuile, null);
@@ -51,11 +52,13 @@ public class TuilesAdapter extends BaseAdapter{
             convertView.setTag(viewHolder);
         }
 
-        final ViewHolder viewHolder = (ViewHolder)convertView.getTag();
+        //if (tuile != null){
+            final ViewHolder viewHolder = (ViewHolder)convertView.getTag();
 
-        viewHolder.imgView.setImageResource(tuile.getImgId());
-        viewHolder.titreAnnonceView.setText(tuile.getTitreAnnonce());
-        viewHolder.auteurAnnonceView.setText(tuile.getAuteurAnnonce());
+            viewHolder.imgView.setImageResource(tuile.getImgId());
+            viewHolder.titreAnnonceView.setText(tuile.getTitreAnnonce());
+            viewHolder.auteurAnnonceView.setText(tuile.getAuteurAnnonce());
+       // }
 
         return convertView;
     }
