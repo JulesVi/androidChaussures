@@ -20,10 +20,8 @@ public class DescriptionAnnonce extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    System.out.println("il n'y a pas de probleme");
                     finish();
                     return true;
                 case R.id.navigation_dashboard:
@@ -40,7 +38,7 @@ public class DescriptionAnnonce extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_description_annonce);
+        setContentView(R.layout.activity_description);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 

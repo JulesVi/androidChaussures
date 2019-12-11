@@ -26,4 +26,5 @@
         ullamcorper. Maecenas semper enim at sapien volutpat, vel facilisis tellus pellentesque. Nullam tincidunt nunc id tortor aliquam
         pellentesque.
     </string>
+    <string name="title_activity_description">descriptionActivity</string>
 </resources>
