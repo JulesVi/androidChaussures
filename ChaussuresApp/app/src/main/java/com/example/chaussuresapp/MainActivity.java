@@ -57,9 +57,12 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         bottomNavigationView = findViewById(R.id.nav_view);
         mTextMessage = findViewById(R.id.message);
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        db.collection("annonce").document("robert").set(new AnnonceHelper("https://scene7.zumiez.com/is/image/zumiez/pdp_hero/New-Balance-Numeric-306-Foy-Blue-%26-Red-Skate-Shoes-_320281-front-US.jpg","chaussures pas ouf", "robert", "descrition de robert", "droit", 48, "éclaté au sol", "Chicago", 60007, 30000));
 
         //lecture de toutes les annonces
         db.collection("annonce")
@@ -99,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     }
 
 
-        //ajout d'une annonce
+    //ajout d'une annonce
         //db.collection("annonce").document("robert").set(new AnnonceHelper("NB306", 420, 666, false, "cool chaussure", "http://www.weartested.com/wp-content/uploads/2019/10/Side-1500x728.jpg"));
         //db.collection("annonce").document("kyle").set(new AnnonceHelper("vans kyle walker", 42, 25, true, "chaussure cool", "http://www.bronystuff.fr/media/import/Images/vans%20kyle%20walker-809dkn.jpg"));
         //db.collection("annonce").document("kyle").set(new AnnonceHelper("vans kyle walker", 42, 25, true, "chaussure cool", "http://www.bronystuff.fr/media/import/Images/vans%20kyle%20walker-809dkn.jpg"));
