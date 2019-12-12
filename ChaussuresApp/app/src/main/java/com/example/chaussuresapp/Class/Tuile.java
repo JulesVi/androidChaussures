@@ -24,24 +24,25 @@ public class Tuile implements Serializable {
     private int cp; // code postal
     private int prix;
 
-    public Tuile(String imgId, String titreAnnonce, String auteurAnnonce, String description, String pied, int taille, String etat, String localisation, int cp, int prix ) {
-        this.imgId = imgId;
-        this.titreAnnonce = titreAnnonce;
-        this.auteurAnnonce = auteurAnnonce;
-        this.description = description;
-        this.pied = pied;
-        this.taille = taille;
-        this.etat = etat;
-        this.localisation = localisation;
-        this.cp = cp;
-        this.prix = prix;
-    }
+//    public Tuile(String imgId, String titreAnnonce, String auteurAnnonce, String description, String pied, int taille, String etat, String localisation, int cp, int prix) {
+//        this.imgId = imgId;
+//        this.titreAnnonce = titreAnnonce;
+//        this.auteurAnnonce = auteurAnnonce;
+//        this.description = description;
+//        this.pied = pied;
+//        this.taille = taille;
+//        this.etat = etat;
+//        this.localisation = localisation;
+//        this.cp = cp;
+//        this.prix = prix;
+//    }
 
     public Tuile(QueryDocumentSnapshot document) {
         this.imgId = document.get("image").toString();
         this.titreAnnonce = document.get("titre").toString();
         this.auteurAnnonce = document.getId();
-        this.pied = "pied en dur à modifier";
+        this.description = document.get("description").toString();
+        this.pied = document.get("pied").toString();
         this.taille = new Integer(document.get("taille").toString());
         this.etat = "etat en dur";
         this.localisation = "localisation en dur";
@@ -54,7 +55,6 @@ public class Tuile implements Serializable {
         try {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
-
             //fonctionne uniquement avec les images HTTPS
             URL url = new URL(imgId);
             bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
