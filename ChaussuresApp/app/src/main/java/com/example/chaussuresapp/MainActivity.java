@@ -59,13 +59,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
             return false;
         }
     };
-
-    /*private Tuile tuile1 = new Tuile(R.drawable.img1, "Belles chaussures", "Chris Cole");
-    private Tuile tuile2 = new Tuile(R.drawable.img2, "Chaussure moche", "Toto");
-    private Tuile tuile3 = new Tuile(R.drawable.img3, "Pas une chaussure", "Balthazar");
-    private Tuile tuile4 = new Tuile(R.drawable.img1, "Autre chose", "Michel");
-    private Tuile tuile5 = new Tuile(R.drawable.img3, "Encore autre truc", "Jean claude");*/
-
     private Tuile[] tuiles = new Tuile[1];
 
     @Override
@@ -78,7 +71,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 //        Tuile tuile3 = new Tuile(bmp, "Pas une chaussure", "Balthazar", "gauche", 41, "neuf", "Grenoble", 38100);
 //        Tuile tuile4 = new Tuile(bmp, "Autre chose", "Michel", "gauche", 41, "neuf", "Grenoble", 38100);
 //        Tuile tuile5 = new Tuile(bmp, "Encore autre truc", "Jean claude", "gauche", 41, "neuf", "Grenoble", 38100);
-
        /// Tuile[] tuiles = { tuile1, tuile2, tuile3, tuile4, tuile5 };
 
         bottomNavigationView = findViewById(R.id.nav_view);
@@ -96,6 +88,36 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 //                whenDataReady();
 //            }
 //        });
+        final DocumentReference docRef = db.collection("annonce").document("kyle");
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                AnnonceHelper annonce1 = documentSnapshot.toObject(AnnonceHelper.class);
+                Log.i("aa", "" + docRef.getId());
+                tuiles[0] = new Tuile(annonce1.getImage(), annonce1.getTitre(), docRef.getId().toString() /*correspond à l'auteur*/, annonce1.getDescription(), "gauche", annonce1.getTaille(), "neuf", "Chicago", 1, annonce1.getPrix());
+                whenDataReady();
+            }
+        });
+    }
+
+
+    protected void whenDataReady() {
+        GridView gridView = (GridView)findViewById(R.id.GridView);
+        TuilesAdapter tuilesAdapter = new TuilesAdapter(this, tuiles);
+        gridView.setAdapter(tuilesAdapter);
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainActivity.this, DescriptionAnnonce.class);
+                intent.putExtra("tuile", tuiles[position]);
+                startActivity(intent);
+            }
+        });
+
+
+        //ajout d'une annonce
+//        db.collection("annonce").document("robert").set(new AnnonceHelper("NB306", 420, 666, false, "cool chaussure", "http://www.weartested.com/wp-content/uploads/2019/10/Side-1500x728.jpg"));
 
         //lecture de toutes les annonces
         db.collection("annonce")

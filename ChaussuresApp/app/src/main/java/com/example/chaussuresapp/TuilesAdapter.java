@@ -7,9 +7,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.chaussuresapp.Class.Tuile;
+
+import java.io.IOException;
 
 public class TuilesAdapter extends BaseAdapter{
     private final Context mContext;
@@ -52,13 +53,12 @@ public class TuilesAdapter extends BaseAdapter{
             convertView.setTag(viewHolder);
         }
 
-        //if (tuile != null){
-            final ViewHolder viewHolder = (ViewHolder)convertView.getTag();
-
-            //viewHolder.imgView.setImageResource(tuile.getImgId());
-            //viewHolder.titreAnnonceView.setText(tuile.getTitreAnnonce());
-            //viewHolder.auteurAnnonceView.setText(tuile.getAuteurAnnonce());
-       // }
+        final ViewHolder viewHolder = (ViewHolder)convertView.getTag();
+        try {
+            viewHolder.imgView.setImageBitmap(tuile.getImgBmp());
+        } catch (IOException e) {}
+        viewHolder.titreAnnonceView.setText(tuile.getTitreAnnonce());
+        viewHolder.auteurAnnonceView.setText(tuile.getAuteurAnnonce());
 
         return convertView;
     }

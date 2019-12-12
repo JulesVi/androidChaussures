@@ -15,6 +15,8 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.IOException;
+
 public class DescriptionAnnonce extends AppCompatActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -53,5 +55,13 @@ public class DescriptionAnnonce extends AppCompatActivity {
 
         ImageView imageAnnonce = findViewById(R.id.imageAnnonce);
         //imageAnnonce.setImageResource(tuileAnnonce.getImgId());
+        try {
+            imageAnnonce.setImageBitmap(tuileAnnonce.getImgBmp());
+        } catch (IOException e) {}
+        TextView contentDescription = findViewById(R.id.description);
+        contentDescription.setText(tuileAnnonce.getDescription());
+
+        TextView lePrix = findViewById(R.id.prixView);
+        lePrix.setText(tuileAnnonce.getPrix());
     }
 }
