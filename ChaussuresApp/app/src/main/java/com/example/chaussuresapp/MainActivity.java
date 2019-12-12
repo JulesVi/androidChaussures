@@ -22,6 +22,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
 
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -72,32 +73,53 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Tuile tuile1 = new Tuile(bmp, "Belles chaussures", "Chris Cole", "gauche", 41, "neuf", "Grenoble", 38100);
-        Tuile tuile2 = new Tuile(bmp, "Chaussure moche", "Toto", "gauche", 41, "neuf", "Grenoble", 38100);
-        Tuile tuile3 = new Tuile(bmp, "Pas une chaussure", "Balthazar", "gauche", 41, "neuf", "Grenoble", 38100);
-        Tuile tuile4 = new Tuile(bmp, "Autre chose", "Michel", "gauche", 41, "neuf", "Grenoble", 38100);
-        Tuile tuile5 = new Tuile(bmp, "Encore autre truc", "Jean claude", "gauche", 41, "neuf", "Grenoble", 38100);
+//        Tuile tuile1 = new Tuile(bmp, "Belles chaussures", "Chris Cole", "gauche", 41, "neuf", "Grenoble", 38100);
+//        Tuile tuile2 = new Tuile(bmp, "Chaussure moche", "Toto", "gauche", 41, "neuf", "Grenoble", 38100);
+//        Tuile tuile3 = new Tuile(bmp, "Pas une chaussure", "Balthazar", "gauche", 41, "neuf", "Grenoble", 38100);
+//        Tuile tuile4 = new Tuile(bmp, "Autre chose", "Michel", "gauche", 41, "neuf", "Grenoble", 38100);
+//        Tuile tuile5 = new Tuile(bmp, "Encore autre truc", "Jean claude", "gauche", 41, "neuf", "Grenoble", 38100);
 
-        Tuile[] tuiles = { tuile1, tuile2, tuile3, tuile4, tuile5 };
+       /// Tuile[] tuiles = { tuile1, tuile2, tuile3, tuile4, tuile5 };
 
         bottomNavigationView = findViewById(R.id.nav_view);
         mTextMessage = findViewById(R.id.message);
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         //lecture de l'annonce robert récupéré dans l'objet annonce1
-        final DocumentReference docRef = db.collection("annonce").document("robert");
-        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                AnnonceHelper annonce1 = documentSnapshot.toObject(AnnonceHelper.class);
-                Log.i("aa", "" + docRef.getId());
-                tuiles[0] = new Tuile(R.drawable.img2, annonce1.getTitre(), docRef.getId().toString(), "gauche", annonce1.getTaille(), "neuf", "Chicago", 1);
-                whenDataReady();
-            }
-        });
+//        final DocumentReference docRef = db.collection("annonce").document("robert");
+//        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+//            @Override
+//            public void onSuccess(DocumentSnapshot documentSnapshot) {
+//                AnnonceHelper annonce1 = documentSnapshot.toObject(AnnonceHelper.class);
+//                Log.i("aa", "" + docRef.getId());
+//                //tuiles[0] = new Tuile(R.drawable.img2, annonce1.getTitre(), docRef.getId().toString(), "gauche", annonce1.getTaille(), "neuf", "Chicago", 1);
+//                whenDataReady();
+//            }
+//        });
+
+        //lecture de toutes les annonces
+        db.collection("annonce")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d("aa", document.getId() + " => " + document.getData());
+                                Tuile tuile = new Tuile(document);
+                            }
+                        } else {
+                            Log.w("aa", "Error getting documents.", task.getException());
+                        }
+                        whenDataReady();
+                    }
+                });
+
     }
 
-
+    /**
+     * rempli la gridview a partir du tableau "tuiles"
+     */
     protected void whenDataReady() {
         GridView gridView = (GridView)findViewById(R.id.GridView);
         TuilesAdapter tuilesAdapter = new TuilesAdapter(this, tuiles);
@@ -114,25 +136,9 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 
 
         //ajout d'une annonce
-        db.collection("annonce").document("robert").set(new AnnonceHelper("NB306", 420, 666, false, "cool chaussure", "http://www.weartested.com/wp-content/uploads/2019/10/Side-1500x728.jpg"));
-
-        //lecture de toutes les annonces
-        db.collection("annonce")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d("aa", document.getId() + " => " + document.getData());
-                            }
-                        } else {
-                            Log.w("aa", "Error getting documents.", task.getException());
-                        }
-                    }
-                });
-
-
+        //db.collection("annonce").document("robert").set(new AnnonceHelper("NB306", 420, 666, false, "cool chaussure", "http://www.weartested.com/wp-content/uploads/2019/10/Side-1500x728.jpg"));
+        //db.collection("annonce").document("kyle").set(new AnnonceHelper("vans kyle walker", 42, 25, true, "chaussure cool", "http://www.bronystuff.fr/media/import/Images/vans%20kyle%20walker-809dkn.jpg"));
+        //db.collection("annonce").document("kyle").set(new AnnonceHelper("vans kyle walker", 42, 25, true, "chaussure cool", "http://www.bronystuff.fr/media/import/Images/vans%20kyle%20walker-809dkn.jpg"));
 
     }
     @Override

@@ -55,9 +55,9 @@ public class TuilesAdapter extends BaseAdapter{
         //if (tuile != null){
             final ViewHolder viewHolder = (ViewHolder)convertView.getTag();
 
-            viewHolder.imgView.setImageResource(tuile.getImgId());
-            viewHolder.titreAnnonceView.setText(tuile.getTitreAnnonce());
-            viewHolder.auteurAnnonceView.setText(tuile.getAuteurAnnonce());
+            //viewHolder.imgView.setImageResource(tuile.getImgId());
+            //viewHolder.titreAnnonceView.setText(tuile.getTitreAnnonce());
+            //viewHolder.auteurAnnonceView.setText(tuile.getAuteurAnnonce());
        // }
 
         return convertView;
