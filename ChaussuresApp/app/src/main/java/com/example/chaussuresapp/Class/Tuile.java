@@ -44,9 +44,9 @@ public class Tuile implements Serializable {
         this.description = document.get("description").toString();
         this.pied = document.get("pied").toString();
         this.taille = new Integer(document.get("taille").toString());
-        this.etat = document.get("etat").toString();
-        this.localisation = document.get("localisation").toString();
-        this.cp = new Integer(document.get("cp").toString());
+        this.etat = "etat en dur";
+        this.localisation = "localisation en dur";
+        this.cp = 38100;
         this.prix = new Integer(document.get("prix").toString());
     }
 
