@@ -24,18 +24,18 @@ public class Tuile implements Serializable {
     private int cp; // code postal
     private int prix;
 
-//    public Tuile(String imgId, String titreAnnonce, String auteurAnnonce, String description, String pied, int taille, String etat, String localisation, int cp, int prix) {
-//        this.imgId = imgId;
-//        this.titreAnnonce = titreAnnonce;
-//        this.auteurAnnonce = auteurAnnonce;
-//        this.description = description;
-//        this.pied = pied;
-//        this.taille = taille;
-//        this.etat = etat;
-//        this.localisation = localisation;
-//        this.cp = cp;
-//        this.prix = prix;
-//    }
+    public Tuile(String imgId, String titreAnnonce, String auteurAnnonce, String description, String pied, int taille, String etat, String localisation, int cp, int prix) {
+        this.imgId = imgId;
+        this.titreAnnonce = titreAnnonce;
+        this.auteurAnnonce = auteurAnnonce;
+        this.description = description;
+        this.pied = pied;
+        this.taille = taille;
+        this.etat = etat;
+        this.localisation = localisation;
+        this.cp = cp;
+        this.prix = prix;
+    }
 
     public Tuile(QueryDocumentSnapshot document) {
         this.imgId = document.get("image").toString();

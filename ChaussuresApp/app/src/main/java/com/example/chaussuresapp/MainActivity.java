@@ -1,20 +1,13 @@
 package com.example.chaussuresapp;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import com.example.chaussuresapp.Class.Tuile;
-import com.example.chaussuresapp.api.AnnonceHelper;
 import com.example.chaussuresapp.auth.ProfileActivity;
-import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -30,8 +23,7 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 import java.io.Serializable;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements Serializable {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -59,36 +51,15 @@ public class MainActivity extends AppCompatActivity implements Serializable {
             return false;
         }
     };
-    private Tuile[] tuiles = new Tuile[2];
+    private ArrayList<Tuile> tuiles = new ArrayList<Tuile>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-//        Tuile tuile1 = new Tuile(bmp, "Belles chaussures", "Chris Cole", "gauche", 41, "neuf", "Grenoble", 38100);
-//        Tuile tuile2 = new Tuile(bmp, "Chaussure moche", "Toto", "gauche", 41, "neuf", "Grenoble", 38100);
-//        Tuile tuile3 = new Tuile(bmp, "Pas une chaussure", "Balthazar", "gauche", 41, "neuf", "Grenoble", 38100);
-//        Tuile tuile4 = new Tuile(bmp, "Autre chose", "Michel", "gauche", 41, "neuf", "Grenoble", 38100);
-//        Tuile tuile5 = new Tuile(bmp, "Encore autre truc", "Jean claude", "gauche", 41, "neuf", "Grenoble", 38100);
-       /// Tuile[] tuiles = { tuile1, tuile2, tuile3, tuile4, tuile5 };
-
         bottomNavigationView = findViewById(R.id.nav_view);
         mTextMessage = findViewById(R.id.message);
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-        //lecture de l'annonce robert récupéré dans l'objet annonce1
-//        final DocumentReference docRef = db.collection("annonce").document("kyle");
-//        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-//            @Override
-//            public void onSuccess(DocumentSnapshot documentSnapshot) {
-//                AnnonceHelper annonce1 = documentSnapshot.toObject(AnnonceHelper.class);
-//                Log.i("aa", "" + docRef.getId());
-//                tuiles[0] = new Tuile(annonce1.getImage(), annonce1.getTitre(), docRef.getId().toString() /*correspond à l'auteur*/, annonce1.getDescription(), "gauche", annonce1.getTaille(), "neuf", "Chicago", 1, annonce1.getPrix());
-//                whenDataReady();
-//            }
-//        });
-
 
         //lecture de toutes les annonces
         db.collection("annonce")
@@ -100,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                             int i = 0;
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("aa", document.getId() + " => " + document.getData());
-                                tuiles[i] = new Tuile(document);
+                                tuiles.add(new Tuile(document));
                                 i++;
                             }
                         } else {
@@ -121,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MainActivity.this, DescriptionAnnonce.class);
-                intent.putExtra("tuile", tuiles[position]);
+                intent.putExtra("tuile", tuiles.get(position));
                 startActivity(intent);
             }
         });
