@@ -7,6 +7,9 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+/**
+ * classe permettant de manipuler la collection user (non fonctionelle pour l'instant)
+ */
 public class UserHelper {
 
     private static final String COLLECTION_NAME = "users";

@@ -35,6 +35,11 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
+        /**
+         * mise en place de la bottom navigation
+         * @param item
+         * @return
+         */
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
@@ -52,8 +57,15 @@ public class MainActivity extends AppCompatActivity implements Serializable {
             return false;
         }
     };
+
     private ArrayList<Tuile> tuiles = new ArrayList<Tuile>();
 
+    /**
+     * liaison des attributs avec ceux de la view,
+     * lecture de la collection annonce dans firebase,
+     * remplissage de tuiles
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,8 +75,52 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         mTextMessage = findViewById(R.id.message);
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        db.collection("annonce").document("robert").set(new AnnonceHelper("https://scene7.zumiez.com/is/image/zumiez/pdp_hero/New-Balance-Numeric-306-Foy-Blue-%26-Red-Skate-Shoes-_320281-front-US.jpg","chaussures pas ouf", "robert", "descrition de robert", "droit", 48, "éclaté au sol", "Chicago", 60007, 30000));
+        //db.collection("annonce").document("robert").set(new AnnonceHelper("https://scene7.zumiez.com/is/image/zumiez/pdp_hero/New-Balance-Numeric-306-Foy-Blue-%26-Red-Skate-Shoes-_320281-front-US.jpg","chaussures pas ouf", "robert", "descrition de robert", "droit", 48, "éclaté au sol", "Chicago", 60007, 30000));
 
+        //lecture de toutes les annonces
+//        db.collection("annonce")
+//                .get()
+//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if (task.isSuccessful()) {
+//                            for (QueryDocumentSnapshot document : task.getResult()) {
+//                                Log.d("aa", document.getId() + " => " + document.getData());
+//                                tuiles.add(new Tuile(document));
+//
+//                            }
+//                        } else {
+//                            Log.w("aa", "Error getting documents.", task.getException());
+//                        }
+//                        whenDataReady();
+//                    }
+//                });
+    }
+
+
+    /**
+     * envoi du contenu de tuiles dans la gridView
+     */
+    protected void whenDataReady() {
+        GridView gridView = (GridView) findViewById(R.id.GridView);
+        TuilesAdapter tuilesAdapter = new TuilesAdapter(this, tuiles);
+        gridView.setAdapter(tuilesAdapter);
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainActivity.this, DescriptionAnnonce.class);
+                intent.putExtra("tuile", tuiles.get(position));
+                startActivity(intent);
+            }
+        });
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        bottomNavigationView.setSelectedItemId(R.id.navigation_home);
+
+        tuiles = new ArrayList<Tuile>();
         //lecture de toutes les annonces
         db.collection("annonce")
                 .get()
@@ -83,33 +139,5 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                         whenDataReady();
                     }
                 });
-    }
-
-
-    protected void whenDataReady() {
-        GridView gridView = (GridView) findViewById(R.id.GridView);
-        TuilesAdapter tuilesAdapter = new TuilesAdapter(this, tuiles);
-        gridView.setAdapter(tuilesAdapter);
-
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MainActivity.this, DescriptionAnnonce.class);
-                intent.putExtra("tuile", tuiles.get(position));
-                startActivity(intent);
-            }
-        });
-    }
-
-
-    //ajout d'une annonce
-        //db.collection("annonce").document("robert").set(new AnnonceHelper("NB306", 420, 666, false, "cool chaussure", "http://www.weartested.com/wp-content/uploads/2019/10/Side-1500x728.jpg"));
-        //db.collection("annonce").document("kyle").set(new AnnonceHelper("vans kyle walker", 42, 25, true, "chaussure cool", "http://www.bronystuff.fr/media/import/Images/vans%20kyle%20walker-809dkn.jpg"));
-        //db.collection("annonce").document("kyle").set(new AnnonceHelper("vans kyle walker", 42, 25, true, "chaussure cool", "http://www.bronystuff.fr/media/import/Images/vans%20kyle%20walker-809dkn.jpg"));
-
-    @Override
-    public void onResume(){
-        super.onResume();
-        bottomNavigationView.setSelectedItemId(R.id.navigation_home);
     }
 }
