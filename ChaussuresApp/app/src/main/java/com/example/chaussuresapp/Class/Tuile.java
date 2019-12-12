@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.os.StrictMode;
 
 import com.example.chaussuresapp.R;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -36,12 +37,18 @@ public class Tuile implements Serializable {
         this.prix = prix;
     }
 
-    /**
-     *
-     * @return
-     * @throws IOException
-     */
-    public Bitmap getImgBmp() throws IOException {
+    public Tuile(QueryDocumentSnapshot document) {
+        this.imgId = document.get("image").toString();
+        this.titreAnnonce = document.get("titre").toString();
+        this.auteurAnnonce = document.getId();
+        this.pied = "pied en dur à modifier";
+        this.taille = new Integer(document.get("taille").toString());
+        this.etat = "etat en dur";
+        this.localisation = "localisation en dur";
+        this.cp = 38100;
+    }
+
+    public Bitmap getImgId() throws IOException {
         Bitmap bmp = null;
         try {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();

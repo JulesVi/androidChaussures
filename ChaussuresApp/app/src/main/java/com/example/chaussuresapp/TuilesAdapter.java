@@ -54,7 +54,6 @@ public class TuilesAdapter extends BaseAdapter{
         }
 
         final ViewHolder viewHolder = (ViewHolder)convertView.getTag();
-
         try {
             viewHolder.imgView.setImageBitmap(tuile.getImgBmp());
         } catch (IOException e) {}

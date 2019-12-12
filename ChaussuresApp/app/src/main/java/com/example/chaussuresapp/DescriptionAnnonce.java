@@ -54,6 +54,7 @@ public class DescriptionAnnonce extends AppCompatActivity {
         titreAnnonce.setText(tuileAnnonce.getTitreAnnonce());
 
         ImageView imageAnnonce = findViewById(R.id.imageAnnonce);
+        //imageAnnonce.setImageResource(tuileAnnonce.getImgId());
         try {
             imageAnnonce.setImageBitmap(tuileAnnonce.getImgBmp());
         } catch (IOException e) {}

@@ -76,6 +76,7 @@ public class ProfileActivity extends BaseActivity {
         }
     };
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,6 +122,11 @@ public class ProfileActivity extends BaseActivity {
         this.updateUIWhenCreating();
     }
 
+    /**
+     *  Si l'utilisateur est n'est pas connecté,
+     *  lance l'activité de de connexion avec firebase
+     *  sinon le déconnecte.
+     */
     private void buttonPressed(){
         if (this.getCurrentUser() != null){
             this.signOutUserFromFirebase();
@@ -130,15 +136,24 @@ public class ProfileActivity extends BaseActivity {
         }
     }
 
+    /**
+     * Une fois que l'activité de connexion est terminée,
+     * modifie la page pour correspondre à celle d'un utilisateur connecté.
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        btn.setText("deconnexion");
+        //btn.setText("deconnexion");
         btnModifCompte.setVisibility(View.VISIBLE);
         updateUIWhenCreating();
     }
 
-    // 2 - Launch Sign-In Activity
+    /**
+     * Lance l'activité de connexion firebase
+     */
     private void startSignInActivity(){
             startActivityForResult(
                     AuthUI.getInstance()
@@ -152,7 +167,9 @@ public class ProfileActivity extends BaseActivity {
                     RC_SIGN_IN);
     }
 
-    // 1 - Update UI when activity is creating
+    /**
+     * Met à jour l'IHM
+     */
     private void updateUIWhenCreating(){
 
         if (this.getCurrentUser() != null) {
@@ -181,13 +198,20 @@ public class ProfileActivity extends BaseActivity {
         }
     }
 
+    /**
+     * Déconnecte l'utilisateur de firebase
+     */
     private void signOutUserFromFirebase(){
         AuthUI.getInstance()
                 .signOut(this)
                 .addOnSuccessListener(this, this.updateUIAfterRESTRequestsCompleted(SIGN_OUT_TASK));
     }
 
-    // 3 - Create OnCompleteListener called after tasks ended
+    /**
+     * SuccessListener de firebase : Create OnCompleteListener called after tasks ended
+     * @param origin
+     * @return
+     */
     private OnSuccessListener<Void> updateUIAfterRESTRequestsCompleted(final int origin){
         return new OnSuccessListener<Void>() {
             @Override
@@ -206,7 +230,9 @@ public class ProfileActivity extends BaseActivity {
         };
     }
 
-    // 3 - Update User Username
+    /**
+     * modifie le pseudo de l'utilisateur (crash pour l'instant)
+     */
     private void updateUsernameInFirebase(){
 
         String username = this.textInputEditTextUsername.getText().toString();
