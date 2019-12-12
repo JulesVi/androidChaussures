@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -20,11 +21,17 @@ import com.example.chaussuresapp.AddAnnonce;
 import com.example.chaussuresapp.DescriptionAnnonce;
 import com.example.chaussuresapp.MainActivity;
 import com.example.chaussuresapp.R;
+import com.example.chaussuresapp.api.AnnonceHelper;
 import com.example.chaussuresapp.api.UserHelper;
 import com.example.chaussuresapp.base.BaseActivity;
 import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Arrays;
 
