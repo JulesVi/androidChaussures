@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">ChaussuresApp</string>
     <string name="title_home">Accueil</string>
-    <string name="title_add">+</string>
+    <string name="title_add">Ajouter une annonce</string>
     <string name="title_profil">Mon Profil</string>
     <string name="icon_description">Image représentant l\'appIcon</string>
     <string name="title_activity_description_annonce">DescriptionAnnonce</string>
@@ -26,4 +26,6 @@
         ullamcorper. Maecenas semper enim at sapien volutpat, vel facilisis tellus pellentesque. Nullam tincidunt nunc id tortor aliquam
         pellentesque.
     </string>
+    <string name="title_activity_description">descriptionActivity</string>
+    <string name="title_activity_addannonce">AddAnnonce</string>
 </resources>

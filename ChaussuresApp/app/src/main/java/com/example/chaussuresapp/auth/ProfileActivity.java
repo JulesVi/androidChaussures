@@ -17,6 +17,9 @@ import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.chaussuresapp.AddAnnonce;
+import com.example.chaussuresapp.DescriptionAnnonce;
+import com.example.chaussuresapp.MainActivity;
 import com.example.chaussuresapp.R;
 import com.example.chaussuresapp.api.AnnonceHelper;
 import com.example.chaussuresapp.api.UserHelper;
@@ -58,9 +61,13 @@ public class ProfileActivity extends BaseActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     finish();
+                    startActivity(new Intent(ProfileActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                     return true;
                 case R.id.navigation_dashboard:
+                    startActivity(new Intent(ProfileActivity.this, AddAnnonce.class));
+                    overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+                    finish();
                     return true;
                 case R.id.navigation_notifications:
                     return true;

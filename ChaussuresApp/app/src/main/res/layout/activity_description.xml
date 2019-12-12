@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/linearDescription"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".DescriptionAnnonce">
+
     <ScrollView
         android:id="@+id/scrollDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fillViewport="false">
+        android:fillViewport="false"
+        app:layout_constraintTop_toTopOf="parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <ImageView
                 android:id="@+id/imageAnnonce"
                 android:layout_width="395sp"
@@ -27,6 +30,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/avatars[3]" />
+
             <TextView
                 android:id="@+id/nomAnnonce"
                 android:layout_width="wrap_content"
@@ -39,15 +43,16 @@
                 app:layout_constraintHorizontal_bias="0.469"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageAnnonce" />
+
             <TextView
                 android:id="@+id/prixView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8sp"
                 android:layout_marginTop="8sp"
-                android:textColor="@color/LeBonCoin"
                 android:text="60 000€"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/LeBonCoin"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/nomAnnonce" />
 
@@ -71,11 +76,13 @@
                 android:text="@string/lorem_contenu"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="5sp"
-                android:background="@android:color/darker_gray"/>
+                android:background="@android:color/darker_gray" />
+
             <TextView
                 android:id="@+id/tvCriteres"
                 android:layout_width="match_parent"
@@ -84,35 +91,41 @@
                 android:layout_marginTop="8sp"
                 android:text="Critères"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
                 android:layout_marginStart="8sp"
-                android:layout_marginTop="8sp">
+                android:layout_marginTop="8sp"
+                android:orientation="horizontal">
+
                 <TextView
                     android:id="@+id/type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10sp"
                     android:text="Chaussure droite" />
+
                 <TextView
                     android:id="@+id/taille"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10sp"
                     android:text="36" />
+
                 <TextView
                     android:id="@+id/etat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="neuf" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="5sp"
-                android:background="@android:color/darker_gray"/>
+                android:background="@android:color/darker_gray" />
+
             <TextView
                 android:id="@+id/tvLocalisation"
                 android:layout_width="match_parent"
@@ -121,37 +134,42 @@
                 android:layout_marginTop="8sp"
                 android:text="Localisation"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
                 android:layout_marginStart="8sp"
-                android:layout_marginTop="8sp">
+                android:layout_marginTop="8sp"
+                android:orientation="horizontal">
+
                 <TextView
                     android:id="@+id/ville"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10sp"
                     android:text="Lille" />
+
                 <TextView
                     android:id="@+id/cp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="59650" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="5sp"
-                android:background="@android:color/darker_gray"/>
+                android:background="@android:color/darker_gray" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
                 android:layout_marginStart="8sp"
                 android:layout_marginTop="8sp"
+                android:layout_marginEnd="8sp"
                 android:layout_marginRight="8sp"
-                android:layout_marginEnd="8sp">
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/prenom"
@@ -170,16 +188,16 @@
         </LinearLayout>
     </ScrollView>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:background="?android:attr/windowBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/nav_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?android:attr/windowBackground"
-            app:menu="@menu/bottom_nav_menu" />
-    </RelativeLayout>
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

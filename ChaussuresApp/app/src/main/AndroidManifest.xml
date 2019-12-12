@@ -10,8 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".AddAnnonce"
+            android:label="@string/title_activity_addannonce"></activity>
+        <activity
             android:name=".DescriptionAnnonce"
-            android:label="@string/title_activity_description_annonce"></activity>
+            android:label="@string/title_activity_description_annonce" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
@@ -20,12 +23,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- PROFILE ACTIVITY -->
-        <activity android:name=".auth.ProfileActivity"
-            android:parentActivityName=".MainActivity">
-        </activity>
+        </activity> <!-- PROFILE ACTIVITY -->
+        <activity
+            android:name=".auth.ProfileActivity"
+            android:parentActivityName=".MainActivity" />
     </application>
 
 </manifest>
