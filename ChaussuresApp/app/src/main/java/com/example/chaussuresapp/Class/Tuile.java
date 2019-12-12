@@ -39,14 +39,14 @@ public class Tuile implements Serializable {
     }
 
     public Tuile(QueryDocumentSnapshot document) {
-        this.imgId = document.get("image").toString();
-        this.titreAnnonce = document.get("titre").toString();
+        this.imgId = document.get("imgId").toString();
+        this.titreAnnonce = document.get("titreAnnonce").toString();
         this.auteurAnnonce = document.getId();
         this.description = document.get("description").toString();
         this.pied = document.get("pied").toString();
         this.taille = new Integer(document.get("taille").toString());
         this.etat = document.get("etat").toString();
-        this.localisation = "localisation en dur";
+        this.localisation = document.get("localisation").toString();
         this.cp = new Integer(document.get("cp").toString());
         this.prix = new Integer(document.get("prix").toString());
     }

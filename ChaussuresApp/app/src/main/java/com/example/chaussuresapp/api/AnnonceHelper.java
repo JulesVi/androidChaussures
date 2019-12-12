@@ -55,7 +55,7 @@ public class AnnonceHelper {
     public String getDescription() {
         return description;
     }
-    public String getPrix() {
-        return prix+" €";
+    public int getPrix() {
+        return prix;
     }
 }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.chaussuresapp.Class.Tuile;
+import com.example.chaussuresapp.api.AnnonceHelper;
 import com.example.chaussuresapp.auth.ProfileActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -71,11 +72,10 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            int i = 0;
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("aa", document.getId() + " => " + document.getData());
                                 tuiles.add(new Tuile(document));
-                                i++;
+
                             }
                         } else {
                             Log.w("aa", "Error getting documents.", task.getException());
