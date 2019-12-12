@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
             return false;
         }
     };
-    private Tuile[] tuiles = new Tuile[1];
+    private Tuile[] tuiles = new Tuile[2];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,46 +78,17 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         //lecture de l'annonce robert récupéré dans l'objet annonce1
-//        final DocumentReference docRef = db.collection("annonce").document("robert");
+//        final DocumentReference docRef = db.collection("annonce").document("kyle");
 //        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
 //            @Override
 //            public void onSuccess(DocumentSnapshot documentSnapshot) {
 //                AnnonceHelper annonce1 = documentSnapshot.toObject(AnnonceHelper.class);
 //                Log.i("aa", "" + docRef.getId());
-//                //tuiles[0] = new Tuile(R.drawable.img2, annonce1.getTitre(), docRef.getId().toString(), "gauche", annonce1.getTaille(), "neuf", "Chicago", 1);
+//                tuiles[0] = new Tuile(annonce1.getImage(), annonce1.getTitre(), docRef.getId().toString() /*correspond à l'auteur*/, annonce1.getDescription(), "gauche", annonce1.getTaille(), "neuf", "Chicago", 1, annonce1.getPrix());
 //                whenDataReady();
 //            }
 //        });
-        final DocumentReference docRef = db.collection("annonce").document("kyle");
-        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                AnnonceHelper annonce1 = documentSnapshot.toObject(AnnonceHelper.class);
-                Log.i("aa", "" + docRef.getId());
-                tuiles[0] = new Tuile(annonce1.getImage(), annonce1.getTitre(), docRef.getId().toString() /*correspond à l'auteur*/, annonce1.getDescription(), "gauche", annonce1.getTaille(), "neuf", "Chicago", 1, annonce1.getPrix());
-                whenDataReady();
-            }
-        });
-    }
 
-
-    protected void whenDataReady() {
-        GridView gridView = (GridView)findViewById(R.id.GridView);
-        TuilesAdapter tuilesAdapter = new TuilesAdapter(this, tuiles);
-        gridView.setAdapter(tuilesAdapter);
-
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MainActivity.this, DescriptionAnnonce.class);
-                intent.putExtra("tuile", tuiles[position]);
-                startActivity(intent);
-            }
-        });
-
-
-        //ajout d'une annonce
-//        db.collection("annonce").document("robert").set(new AnnonceHelper("NB306", 420, 666, false, "cool chaussure", "http://www.weartested.com/wp-content/uploads/2019/10/Side-1500x728.jpg"));
 
         //lecture de toutes les annonces
         db.collection("annonce")
@@ -126,9 +97,11 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                            int i = 0;
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("aa", document.getId() + " => " + document.getData());
-                                Tuile tuile = new Tuile(document);
+                                tuiles[i] = new Tuile(document);
+                                i++;
                             }
                         } else {
                             Log.w("aa", "Error getting documents.", task.getException());
@@ -136,14 +109,11 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                         whenDataReady();
                     }
                 });
-
     }
 
-    /**
-     * rempli la gridview a partir du tableau "tuiles"
-     */
+
     protected void whenDataReady() {
-        GridView gridView = (GridView)findViewById(R.id.GridView);
+        GridView gridView = (GridView) findViewById(R.id.GridView);
         TuilesAdapter tuilesAdapter = new TuilesAdapter(this, tuiles);
         gridView.setAdapter(tuilesAdapter);
 
@@ -155,6 +125,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                 startActivity(intent);
             }
         });
+    }
 
 
         //ajout d'une annonce
@@ -162,7 +133,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         //db.collection("annonce").document("kyle").set(new AnnonceHelper("vans kyle walker", 42, 25, true, "chaussure cool", "http://www.bronystuff.fr/media/import/Images/vans%20kyle%20walker-809dkn.jpg"));
         //db.collection("annonce").document("kyle").set(new AnnonceHelper("vans kyle walker", 42, 25, true, "chaussure cool", "http://www.bronystuff.fr/media/import/Images/vans%20kyle%20walker-809dkn.jpg"));
 
-    }
     @Override
     public void onResume(){
         super.onResume();

@@ -46,9 +46,10 @@ public class Tuile implements Serializable {
         this.etat = "etat en dur";
         this.localisation = "localisation en dur";
         this.cp = 38100;
+        this.prix = new Integer(document.get("prix").toString());
     }
 
-    public Bitmap getImgId() throws IOException {
+    public Bitmap getImgBmp() throws IOException {
         Bitmap bmp = null;
         try {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
