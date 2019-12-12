@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,19 +12,20 @@ import android.widget.TextView;
 import com.example.chaussuresapp.Class.Tuile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class TuilesAdapter extends BaseAdapter{
     private final Context mContext;
-    private final Tuile[] tuiles;
+    private final ArrayList<Tuile> tuiles;
 
-    public TuilesAdapter(Context context, Tuile[] tuiles) {
+    public TuilesAdapter(Context context, ArrayList<Tuile> tuiles) {
         this.mContext = context;
         this.tuiles = tuiles;
     }
 
     @Override
     public int getCount() {
-        return tuiles.length;
+        return tuiles.size();
     }
 
     @Override
@@ -38,7 +40,7 @@ public class TuilesAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final Tuile tuile = tuiles[position];
+        final Tuile tuile = tuiles.get(position);
 
 
         if (convertView == null) {
