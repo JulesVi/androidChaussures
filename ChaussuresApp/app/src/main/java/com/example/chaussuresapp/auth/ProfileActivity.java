@@ -35,6 +35,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Arrays;
 
+/**
+ * activité du profile de l'utilisateur
+ */
 public class ProfileActivity extends BaseActivity {
 
     private static final int RC_SIGN_IN = 123;
@@ -53,9 +56,15 @@ public class ProfileActivity extends BaseActivity {
     private static final int DELETE_USER_TASK = 20;
 
     private BottomNavigationView bottomNavigationView;
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
+        /**
+         * mise en place de la bottom navigation
+         * @param item
+         * @return
+         */
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
@@ -76,7 +85,11 @@ public class ProfileActivity extends BaseActivity {
         }
     };
 
-
+    /**
+     * liaison des attributs avec ceux de la view,
+     * mise en place de l'interface en fonction de si l'utilisateur est connecté ou non
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

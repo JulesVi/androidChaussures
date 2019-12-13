@@ -3,17 +3,28 @@ package com.example.chaussuresapp;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.chaussuresapp.api.AnnonceHelper;
 import com.example.chaussuresapp.auth.ProfileActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
 
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class AddAnnonce extends AppCompatActivity {
     private TextView mTextMessage;
+
+    private EditText editTextPseudo;
+    private EditText editTextTitre;
+    private EditText editTextLien;
+    private Button buttonAdd;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -46,6 +57,25 @@ public class AddAnnonce extends AppCompatActivity {
         mTextMessage = findViewById(R.id.message);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navView.setSelectedItemId(R.id.navigation_dashboard);
+
+        editTextPseudo = findViewById(R.id.editTextPseudo);
+        editTextTitre = findViewById(R.id.editTextTitre);
+        editTextLien = findViewById(R.id.editTextLien);
+        buttonAdd = findViewById(R.id.buttonAdd);
+        buttonAdd.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                buttonPressed();
+            }
+        });
+    }
+
+    private void buttonPressed(){
+        db.collection("annonce").document(editTextPseudo.getText().toString()).set(new AnnonceHelper(editTextLien.getText().toString(),
+                editTextTitre.getText().toString(),
+                editTextPseudo.getText().toString(),
+                "descrition de "+editTextPseudo.getText().toString(),
+                "droit", 48, "éclaté au sol", "Chicago", 60007, 30000));
+
     }
 
 }

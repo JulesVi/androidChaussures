@@ -13,6 +13,9 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+/**
+ * classe permettant d'utiliser certaines fonctionnalités de firebase
+ */
 public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +27,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     // UTILS
     // --------------------
 
+    /**
+     * permet de savoir si l'utilsateur est connecté à firebase
+     * @return
+     */
     @Nullable
     protected FirebaseUser getCurrentUser(){ return FirebaseAuth.getInstance().getCurrentUser(); }
 

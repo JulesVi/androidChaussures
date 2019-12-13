@@ -1,5 +1,8 @@
 package com.example.chaussuresapp.api;
 
+/**
+ * classe permettant d'instancier des annonces dans la base firebase
+ */
 public class AnnonceHelper {
     private String imgId;
     private String titreAnnonce;
@@ -55,7 +58,7 @@ public class AnnonceHelper {
     public String getDescription() {
         return description;
     }
-    public String getPrix() {
-        return prix+" €";
+    public int getPrix() {
+        return prix;
     }
 }
